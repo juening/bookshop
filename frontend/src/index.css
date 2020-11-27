@@ -7,3 +7,7 @@ main {
   overflow: hidden;
   white-space: nowrap;
 }
+
+h3 {
+  padding: 1rem 0;
+}
