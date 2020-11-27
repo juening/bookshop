@@ -26,10 +26,10 @@ const Rating = ({value, text, color}) => {
 }
 
 Rating.defaultProps = {
-color:'#8e8252'
+    color:'#ff7186'
 };
 
-Rating.PropTypes ={
+Rating.propTypes ={
     value:PropTypes.number.isRequired,
     text:PropTypes.string.isRequired,
     color:PropTypes.string
