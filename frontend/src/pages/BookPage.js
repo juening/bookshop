@@ -14,7 +14,7 @@ const BookPage = ({match}) => {
             setBook(data);
         }
         fetchBook()
-    }, [])
+    }, [match])
 
     return (
         <div>

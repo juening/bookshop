@@ -1,5 +1,10 @@
-const express = require('express');
-const books = require('./data/books')
+import express from 'express';
+import dotenv from 'dotenv';
+import books from './data/books.js';
+
+dotenv.config();
+
+const PORT =  process.env.PORT || 5000;
 
 const app = express();
 
@@ -16,7 +21,6 @@ app.get('/api/book/:id', (req, res) => {
     res.json(book);
 });
 
-
-app.listen(5000, function(){
-    console.log('App is litening on ', 5000)
+app.listen(PORT, function(){
+    console.log(`App is running in ${process.env.NODE_ENV} on ${PORT}`)
 } );
