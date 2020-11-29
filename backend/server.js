@@ -17,7 +17,22 @@ app.get('/', (req, res) => {
     res.send('API is running...')
 });
 
-app.use('/api/books', bookRoutes)
+app.use('/api/books', bookRoutes);
+
+app.use((req, res, next) => {
+    const error = new Error(`Not found - ${req.originalUrl}`);
+    res.status(404);
+    next(error);
+})
+
+app.use((err, req, res,next) => {
+    const errorStatusCode = res.statusCode ===200?500:res.statusCode;
+    res.status(errorStatusCode);
+    res.json({
+        message:err.message,
+        stack: process.env.NODE_ENV ==='production'? null: err.stack
+    })
+})
 
 app.listen(PORT, function(){
     console.log(`App is running in ${process.env.NODE_ENV} on ${PORT}`.green.bold)
