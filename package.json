@@ -8,9 +8,7 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": " concurrently \"npm run server\" \"npm run client\" ",
-    "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "dev": " concurrently \"npm run server\" \"npm run client\" "
   },
   "repository": {
     "type": "git",
@@ -30,6 +28,7 @@
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.10.17"
   },
   "devDependencies": {
