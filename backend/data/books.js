@@ -1,6 +1,6 @@
 const books = [
   {
-    _id: '1',
+   
     name: "Why Zebras Don't Get Ulcers",
     image: '/images/Why_Zebras_Dont_Get_Ulcers.jpg',
     description:"Renowned primatologist Robert Sapolsky offers a completely revised and updated edition of his most popular work, with over 225,000 copies in print. Now in a third edition, Robert M. Sapolsky's acclaimed and successful Why Zebras Don't Get Ulcers features new chapters on how stress affects sleep and addiction, as well as new insights into anxiety and personality disorder and the impact of spirituality on managing stress.",
@@ -13,7 +13,7 @@ const books = [
     numReviews: 10,
   },
   {
-    _id: '2',
+  
     name: 'What Happens in Paradise',
     image: '/images/What_Happens_in_Paradise.jpg',
     description:
@@ -27,7 +27,7 @@ const books = [
     numReviews: 12,
   },
   {
-    _id: '3',
+
     name: 'Running Against the Tide: True Tales from the Stud of the Sea',
     image: '/images/Running_Against_the_Tide.jpg',
     description:
@@ -41,7 +41,7 @@ const books = [
     numReviews: 12,
   },
   {
-    _id: '4',
+  
     name: 'Missing Microbes: How the Overuse of Antibiotics Is Fueling Our Modern Plagues',
     image: '/images/Missing_Microbes.jpg',
     description:
@@ -56,7 +56,7 @@ const books = [
   },
 
   {
-    _id: '5',
+ 
     name: 'Saving Freedom: Truman, the Cold War, and the Fight for Western Civilization',
     image: '/images/Saving_Freedom.jpg',
     description:
@@ -70,7 +70,7 @@ const books = [
     numReviews: 12,
   },
   {
-    _id: '6',
+ 
     name: 'Sideways Stories from Wayside School ',
     image: '/images/Sideways_Stories_from_Wayside_School.jpg',
     description:
