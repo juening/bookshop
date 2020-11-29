@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import colors from 'colors';
 import connectDB from './config/db.js'
 import books from './data/books.js';
 
@@ -25,5 +26,5 @@ app.get('/api/book/:id', (req, res) => {
 });
 
 app.listen(PORT, function(){
-    console.log(`App is running in ${process.env.NODE_ENV} on ${PORT}`)
+    console.log(`App is running in ${process.env.NODE_ENV} on ${PORT}`.green.bold)
 } );
