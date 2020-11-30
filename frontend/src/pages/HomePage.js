@@ -1,33 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Row, Col} from 'react-bootstrap';
-import axios from 'axios';
 
+import {fetchBooks } from '../actions/bookActions'
 import Book from '../components/Book';
 
 
 const HomePage = () => {
-    const [books, setBooks] = useState([]);
+
+    const dispatch = useDispatch();    
+
+    const bookList = useSelector(state => state.bookList);
+    const {books, loading ,error} = bookList;
     
     useEffect(() => {
-        const fetchBooks = async () => {
-            const {data} = await axios.get('/api/books');            
-            setBooks(data)
-        }
-
-        fetchBooks();     
-    }, [])
+        dispatch(fetchBooks()) 
+    }, [dispatch])
 
     return (
-        <div>
+        <>
             <h1>Bestsellers</h1>
-            <Row>
+            {
+                loading? <h3>Loading...</h3> :error? <h3>{error}</h3>: (<Row>
                 {books && books.map(book => (
                     <Col key={book._id} sm={12} md={6} lg={4} xl={3}>
                         <Book book={book} />
                     </Col>
                 ))}
-            </Row>
-        </div>
+            </Row>)
+            }
+           
+        </>
     )
 }
 
