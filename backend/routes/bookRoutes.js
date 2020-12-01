@@ -3,8 +3,6 @@ import asyncHandler from 'express-async-handler';
 const router = express.Router();
 import Book from '../models/bookModel.js';
 
-
-
 router.get('/', asyncHandler( async (req, res) => {
     const books = await Book.find({});
     res.json(books);

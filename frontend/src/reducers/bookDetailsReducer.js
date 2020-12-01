@@ -1,6 +1,6 @@
 import {BOOK_DETAILS_REQUEST, BOOK_DETAILS_SUCCESS, BOOK_DETAILS_FAIL} from '../constants/actionTypes'
 
-const bookDetailsReducer = (state={loading:false, error:null, book:{}}, action) => {
+const bookDetailsReducer = (state={loading:false, error:null, book:null}, action) => {
     switch(action.type) {
         case BOOK_DETAILS_REQUEST:
             return {...state, loading:true};

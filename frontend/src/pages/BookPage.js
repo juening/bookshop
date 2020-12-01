@@ -1,14 +1,15 @@
-import React, { useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
+import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap';
 import {fetchBook} from '../actions/bookActions'
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Rating from '../components/Rating';
 
-const BookPage = ({match}) => {
+const BookPage = ({match, history}) => {
+    const [qty, setQty] = useState(0);
 
     const dispatch = useDispatch();
 
@@ -19,13 +20,16 @@ const BookPage = ({match}) => {
         dispatch(fetchBook(match.params.id))
     }, [match, dispatch])
 
+    const addToCartHandler = () => {
+        history.push(`/cart/${match.params.id}?qty=${qty}`)
+    }
+
     return (
         <>
             <Link className='btn btn-light my-3' to='/'>
                 Go Back
             </Link>
-            { loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (<div>
-        
+            { loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :  (  book&&  
                 <Row>
                     <Col md={6} >
                         <Image src={book.image} alt={book.name} fluid />
@@ -69,8 +73,22 @@ const BookPage = ({match}) => {
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>
+                               {book.countInStock >0 && (<ListGroup.Item>
+                                    <Row>
+                                        <Col>Quantity</Col>
+                                        <Col>
+                                        <Form.Control as='select' value={qty} onChange={e => setQty(e.target.value)}>
+                                            {[...Array(book.countInStock).keys()].map(x => (
+                                                <option key={x+1} value={x+ 1}>
+                                                    {x + 1}
+                                                </option>
+                                            ))}
+                                        </Form.Control>
+                                        </Col>
+                                    </Row>
+                                </ListGroup.Item>)}
                                 <ListGroup.Item>
-                                    <Button type='button' className='btn-block' disabled={book.countInStock ===0}>
+                                    <Button type='button' onClick={addToCartHandler} className='btn-block' disabled={book.countInStock ===0}>
                                         Add to Cart
                                     </Button>
                                 </ListGroup.Item>
@@ -78,7 +96,7 @@ const BookPage = ({match}) => {
                         </Card>
                     </Col>
                 </Row>
-            </div>)
+           )
             }
         </>
     )
