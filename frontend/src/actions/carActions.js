@@ -1,7 +1,5 @@
 import axios from 'axios';
-import {CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR_ITEM ,CART_SET_QUANTITY} from '../constants/actionTypes';
-
-
+import {CART_ADD_ITEM, CART_CLEAR_ITEM ,CART_SET_QUANTITY} from '../constants/actionTypes';
 
 
 export const clearItem = (itemId) => (dispatch, getState) => {
