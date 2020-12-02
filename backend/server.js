@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js'
 
+import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 import bookRoutes from './routes/bookRoutes.js';
 
 dotenv.config();
@@ -19,20 +20,9 @@ app.get('/', (req, res) => {
 
 app.use('/api/books', bookRoutes);
 
-app.use((req, res, next) => {
-    const error = new Error(`Not found - ${req.originalUrl}`);
-    res.status(404);
-    next(error);
-})
+app.use(notFound);
 
-app.use((err, req, res,next) => {
-    const errorStatusCode = res.statusCode ===200?500:res.statusCode;
-    res.status(errorStatusCode);
-    res.json({
-        message:err.message,
-        stack: process.env.NODE_ENV ==='production'? null: err.stack
-    })
-})
+app.use(errorHandler);
 
 app.listen(PORT, function(){
     console.log(`App is running in ${process.env.NODE_ENV} on ${PORT}`.green.bold)
