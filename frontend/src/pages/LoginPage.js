@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Form, Button, Row, Col } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
@@ -8,11 +8,21 @@ import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const LoginPage = ({location}) => {
+const LoginPage = ({location, history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const login = useSelector(state => state.userLogin);
+    const {error,  loading, currentUser} = login;
+
+
     const redirect = location.search? location.search.split('=')[1]:'/';
+
+    useEffect(() => {
+        if(currentUser){
+            history.push(redirect)
+        }
+    }, [history, redirect, currentUser])
 
     const dispatch = useDispatch();
 
@@ -20,10 +30,6 @@ const LoginPage = ({location}) => {
         e.preventDefault();
         dispatch(userLogin(email, password));
     }
-
-    const login = useSelector(state => state.userLogin);
-    const {error, currentUser, loading} = login;
-
 
     return (
         <FormContainer>
@@ -47,7 +53,7 @@ const LoginPage = ({location}) => {
 
             <Row className='py-3'>
                 <Col>
-                    New Customer ? <Link to={redirect? `/register?redirect=${redirect}`:'/register'}>Register</Link>
+                    New Customer ? <Link to={'/register'}>Register</Link>
                 </Col>
             </Row>
         </FormContainer>

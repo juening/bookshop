@@ -32,4 +32,9 @@ export const userLogin = (email, password) => async dispatch => {
             type:USER_LOGIN_REMOVE_ALERT
         })}, 5000)
     }
+};
+
+export const logOut = () => {
+    localStorage.removeItem('currentUser')
+    return {type:USER_LOGOUT};
 }
