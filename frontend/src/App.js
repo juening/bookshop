@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import BookPage from './pages/BookPage';
 import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <main className='py-3'>
         <Container>
           <Route path='/login' component={LoginPage} />
+          <Route path='/register' component={RegisterPage} />
           <Route path='/book/:id' component={BookPage} />
           <Route path='/cart/:id?' component={CartPage} />
           <Route exact path='/' component={HomePage} />

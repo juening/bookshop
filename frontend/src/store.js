@@ -5,12 +5,14 @@ import bookListReducer from './reducers/bookListReducer';
 import bookDetailsReducer from './reducers/bookDetailsReducer';
 import cartReducer from './reducers/cartReducer';
 import userLoginReducer from './reducers/userLoginReducer';
+import userRegisterReducer from './reducers/userRegisterReducer';
 
 const rootReducer = combineReducers({
     bookList: bookListReducer,
     bookDetails: bookDetailsReducer,
     cart: cartReducer,
-    userLogin: userLoginReducer
+    userLogin: userLoginReducer,
+    userRegister: userRegisterReducer
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')):[];
