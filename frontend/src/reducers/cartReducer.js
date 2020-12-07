@@ -1,6 +1,6 @@
-import {CART_ADD_ITEM, CART_SET_QUANTITY, CART_CLEAR_ITEM} from '../constants/actionTypes';
+import {CART_ADD_ITEM, CART_SET_QUANTITY, CART_CLEAR_ITEM, SAVE_SHIPPING_ADDRESS} from '../constants/actionTypes';
 
-const cartReducer = (state = { cartItems:[]}, action) => {
+const cartReducer = (state = { cartItems:[], shippingAddress:{}}, action) => {
 switch(action.type) {
 
     case CART_CLEAR_ITEM:
@@ -10,7 +10,10 @@ switch(action.type) {
         return {...state,  cartItems: addItemToCart(state.cartItems, action.payload)};
 
     case CART_SET_QUANTITY:
-        return {...state, cartItems:state.cartItems.map(item => item._id === action.payload._id? {...item, qty:action.payload.qty}:item)}
+        return {...state, cartItems:state.cartItems.map(item => item._id === action.payload._id? {...item, qty:action.payload.qty}:item)};
+
+    case SAVE_SHIPPING_ADDRESS:
+        return {...state, shippingAddress:action.payload};
 
     default:
         return state;
