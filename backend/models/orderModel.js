@@ -16,10 +16,10 @@ const orderSchema = mongoose.Schema({
         }
     ],
     shippingAddress:{
-        street:{type:String, required:true},
+        streetAddress:{type:String, required:true},
         city:{type:String, required:true},
         state:{type:String, required:true},
-        zipCode:{type:String, required:true},        
+        zip:{type:String, required:true},        
     },
     paymentMethod:{
         type:String,
@@ -37,6 +37,11 @@ const orderSchema = mongoose.Schema({
         default:0.0
     },
     shippingPrice:{
+        type:Number,
+        required:true,
+        default:0.0
+    },
+    subtotalPrice:{
         type:Number,
         required:true,
         default:0.0

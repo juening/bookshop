@@ -4,6 +4,7 @@ import {Form, Button } from 'react-bootstrap';
 
 import {saveShippingAddress} from '../actions/carActions';
 import FormContainer from '../components/FormContainer';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 const ShippingPage = ({history}) => {
     const cart = useSelector(state => state.cart);
@@ -20,10 +21,12 @@ const ShippingPage = ({history}) => {
     const submitHandler = e => {
         e.preventDefault();
         dispatch(saveShippingAddress({streetAddress, city, state, zip}));
+        history.push('/payment')
     }
 
     return (
         <FormContainer>
+            <CheckoutSteps step1 step2 />
             <h1>Shipping Address</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='address'>
