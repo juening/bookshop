@@ -6,13 +6,13 @@ const orderSchema = mongoose.Schema({
         required:true,
         ref:'User'
     },
-    oderItems:[
+    orderItems:[
         {
             name:{type:String, required:true},
             qty:{type:Number, required:true},
             price:{type:Number, required:true},
-            book:{type:mongoose.Schema.Types.ObjectId, ref:'Book',
-            required:true},
+            book:{type:mongoose.Schema.Types.ObjectId, ref:'Book'},
+            image:{type:String, required:true},
         }
     ],
     shippingAddress:{

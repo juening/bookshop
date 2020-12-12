@@ -21,7 +21,7 @@ export const addItem = (id, qty) => async (dispatch,getState) =>{
             name:data.name,
             countInStock:data.countInStock,
             image:data.image,
-            _id:data._id,
+            book:data._id,
             price:data.price,
             qty
         }
