@@ -1,4 +1,4 @@
-import { ORDER_LIST_MY_FAIL, ORDER_LIST_MY_REMOVE_ALERT, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS } from "../constants/actionTypes";
+import { ORDER_LIST_MY_FAIL, ORDER_LIST_MY_REMOVE_ALERT, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_RESET, ORDER_LIST_MY_SUCCESS } from "../constants/actionTypes";
 
 const orderListMyReducer = (state={orders:[], error:null, loading:false}, action) => {
     switch(action.type){
@@ -13,6 +13,9 @@ const orderListMyReducer = (state={orders:[], error:null, loading:false}, action
 
         case ORDER_LIST_MY_REMOVE_ALERT:
             return {...state, error:null};
+
+        case ORDER_LIST_MY_RESET:
+            return {...state, orders:[]};
 
         default:
             return state;

@@ -1,4 +1,4 @@
-import { USER_DETAILS_FAIL, USER_DETAILS_REMOVE_ALERT, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS } from '../constants/actionTypes';
+import { USER_DETAILS_FAIL, USER_DETAILS_REMOVE_ALERT, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS } from '../constants/actionTypes';
 
 const userDetaislReducer = (state={loading:false, error:null, userInfo:null}, action) => {
     switch(action.type) {
@@ -13,6 +13,9 @@ const userDetaislReducer = (state={loading:false, error:null, userInfo:null}, ac
 
         case USER_DETAILS_REMOVE_ALERT:
             return {...state, error:null};
+
+        case USER_DETAILS_RESET:
+            return {...state, userInfo:null};
         
         default:
             return state;
