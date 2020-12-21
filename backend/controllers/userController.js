@@ -86,4 +86,9 @@ export const registerUser = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error('Invalid user data.')
     }
-})
+});
+
+export const getUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
+});
