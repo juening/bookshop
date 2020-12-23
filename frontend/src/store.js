@@ -12,6 +12,7 @@ import orderCreationReducer from './reducers/orderCreationReducer';
 import orderDetailsReducer from './reducers/orderDetaislReducer';
 import orderPayReducer from './reducers/orderPayReducer';
 import orderListMyReducer from './reducers/orderListMyReducer';
+import userListReducer from './reducers/userListReducer';
 
 const rootReducer = combineReducers({
     bookList: bookListReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails:userDetaislReducer,
     userUpdate: userUpdateReducer,
+    userList: userListReducer,
     orderCreate:orderCreationReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
