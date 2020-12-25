@@ -8,15 +8,23 @@ import Loader from '../components/Loader';
 
 import {listUsers, deleteUser} from '../actions/userActions'
 
-const UserList = () => {
+const UserListPage = ({history}) => {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(listUsers());
-    }, [dispatch]);
 
     const userList = useSelector(state => state.userList);
     const {users, error, loading} = userList;
+
+    const userLogin = useSelector(state => state.userLogin);
+    const {currentUser} = userLogin;
+
+    useEffect(() => {
+        console.log(currentUser)
+        if(currentUser && currentUser.isAdmin) {
+            dispatch(listUsers());
+        } else {
+            history.push('/login')
+        }
+    }, [dispatch, history, currentUser]);
 
     const deleteHandler =(id) => {
         deleteUser(id)
@@ -62,4 +70,4 @@ const UserList = () => {
     )
 }
 
-export default UserList
+export default UserListPage;

@@ -1,4 +1,4 @@
-import { USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_RESET, USER_LIST_SUCCESS } from "../constants/actionTypes";
+import { USER_LIST_FAIL, USER_LIST_REMOVE_ALERT, USER_LIST_REQUEST, USER_LIST_RESET, USER_LIST_SUCCESS } from "../constants/actionTypes";
 
 const userListReducer = (state= {loading:false, users:[], error:null}, action) => {
     switch(action.type) {
@@ -12,6 +12,9 @@ const userListReducer = (state= {loading:false, users:[], error:null}, action) =
             return {...state, loading:false, error:action.payload};
 
         case USER_LIST_RESET:
+            return {...state, users:[]};
+
+        case USER_LIST_REMOVE_ALERT:
             return {...state, error:null};
 
         default:
