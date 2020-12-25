@@ -17,17 +17,22 @@ const UserListPage = ({history}) => {
     const userLogin = useSelector(state => state.userLogin);
     const {currentUser} = userLogin;
 
+    const userDelete = useSelector(state => state.userDelete);
+    const {success:successDelete} = userDelete;
+
     useEffect(() => {
-        console.log(currentUser)
+
         if(currentUser && currentUser.isAdmin) {
             dispatch(listUsers());
         } else {
             history.push('/login')
         }
-    }, [dispatch, history, currentUser]);
+    }, [dispatch, history, successDelete, currentUser]);
 
     const deleteHandler =(id) => {
-        deleteUser(id)
+        if(window.confirm('Are you sure?')) {
+            dispatch(deleteUser(id));
+        }
     }
 
     return (

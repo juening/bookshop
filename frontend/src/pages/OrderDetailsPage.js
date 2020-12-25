@@ -52,7 +52,7 @@ const OrderDetailsPage = ({match}) => {
             }
         }
 
-    }, [dispatch, getOrderDetails, order, orderId, successPay]);
+    }, [dispatch,  order, orderId, successPay]);
 
     const successPaymentHandler =(paymentResult)=> {
         console.log(paymentResult);
