@@ -21,8 +21,8 @@ const ProfilePage = ({location, history}) => {
     const userLogin = useSelector(state=> state.userLogin);
     const {currentUser} = userLogin;
 
-    const userUpdate = useSelector(state=>state.userUpdate);
-    const {success} = userUpdate;
+    const userUpdateProfile = useSelector(state=>state.userUpdateProfile);
+    const {success} = userUpdateProfile;
 
     const orderListMy = useSelector(state=>state.orderListMy);
     const {loading:loadingMyList, error:errorMyList, orders} = orderListMy;
