@@ -55,7 +55,7 @@ const Header = () => {
                                          Users
                                      </NavDropdown.Item>
                                  </LinkContainer>
-                                 <LinkContainer to='/admin/booklist'>
+                                 <LinkContainer to='/admin/books'>
                                      <NavDropdown.Item>
                                          Books
                                      </NavDropdown.Item>

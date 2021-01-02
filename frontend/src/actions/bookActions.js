@@ -31,3 +31,11 @@ export const fetchBook = (bookId) => async dispatch => {
         })
     }
 }  
+
+export const deleteBook = bookId => async (dispatch, getState) => {
+
+}
+
+export const createBook = () => async (dispatch, getState) => {
+
+}
