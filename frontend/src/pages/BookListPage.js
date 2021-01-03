@@ -14,6 +14,9 @@ const BookListPage = ({history}) => {
     const bookList = useSelector(state => state.bookList);
     const {books, error, loading} = bookList;
 
+    const bookDelete = useSelector(state => state.bookDelete);
+    const {success:successDelete, error:errorDelete, loading:loadingDelete} = bookDelete;
+
     const userLogin = useSelector(state => state.userLogin);
     const {currentUser} = userLogin;
 
@@ -49,7 +52,8 @@ const BookListPage = ({history}) => {
                     </Button>
                 </Col>
             </Row>
-   
+            {loadingDelete && <Loader /> } 
+            { errorDelete && <Message variant='danger'>{errorDelete}</Message> }
             {loading ? <Loader /> : error? <Message variant='danger'>{error}</Message>: (
                 <Table striped bordered hover responsive className='table-md'>
                     <thead>
