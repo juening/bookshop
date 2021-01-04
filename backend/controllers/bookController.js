@@ -45,9 +45,9 @@ export const createBook = asyncHandler(async (req, res) => {
         countInStock:7
     });
 
-    const createdBook = newBook.save();
+    const createdBook =await newBook.save();
 
-    res.status(201).json(createBook);
+    res.status(201).json(createdBook);
 });
 
 export const updateBook = asyncHandler(async (req, res) => {
@@ -64,7 +64,7 @@ export const updateBook = asyncHandler(async (req, res) => {
         countInStock
     } = req.body;
 
-    const book = Book.findById(req,params.id);
+    const book =await  Book.findById(req.params.id);
 
     if(book) {
         book.name = name || book.name;
@@ -78,7 +78,7 @@ export const updateBook = asyncHandler(async (req, res) => {
         book.binding = binding || book.binding;
         book.countInStock = countInStock || book.countInStock;
 
-        const upatedBook = await book.save();
+        const updatedBook = await book.save();
         res.json(updatedBook);
     } else {
         res.status(404);
