@@ -6,7 +6,8 @@ import {LinkContainer} from 'react-router-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-import {fetchBooks, deleteBook} from '../actions/bookActions'
+import {BOOK_CREATE_RESET} from '../constants/actionTypes';
+import {fetchBooks, deleteBook, createBook} from '../actions/bookActions'
 
 const BookListPage = ({history}) => {
     const dispatch = useDispatch();
@@ -20,15 +21,23 @@ const BookListPage = ({history}) => {
     const userLogin = useSelector(state => state.userLogin);
     const {currentUser} = userLogin;
 
+    const bookCreate = useSelector(state => state.bookCreate);
+    const {loading: loadingCreate, error: errorCreate, createdBook} = bookCreate;
+
 
     useEffect(() => {
-
-        if(currentUser && currentUser.isAdmin) {
-            dispatch(fetchBooks());
-        } else {
+        dispatch({type:BOOK_CREATE_RESET});
+        if(!currentUser || !currentUser.isAdmin) {
             history.push('/login')
+        } 
+
+        if(createdBook) {
+            history.push(`/admin/book/${createBook._id}/edit`)
+        } else {
+            dispatch(fetchBooks())
         }
-    }, [dispatch, history,  currentUser]);
+
+    }, [dispatch, history,  currentUser, createdBook]);
 
     const deleteHandler =(id) => {
         if(window.confirm('Are you sure?')) {
@@ -37,7 +46,7 @@ const BookListPage = ({history}) => {
     }
 
     const createBookHandler = () => {
-
+        dispatch(createBook())
     }
 
     return (
@@ -54,6 +63,8 @@ const BookListPage = ({history}) => {
             </Row>
             {loadingDelete && <Loader /> } 
             { errorDelete && <Message variant='danger'>{errorDelete}</Message> }
+            {loadingCreate && <Loader /> } 
+            { errorCreate && <Message variant='danger'>{errorCreate}</Message> }
             {loading ? <Loader /> : error? <Message variant='danger'>{error}</Message>: (
                 <Table striped bordered hover responsive className='table-md'>
                     <thead>
