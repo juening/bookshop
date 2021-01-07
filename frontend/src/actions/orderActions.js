@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ORDER_CREATION_FAIL, ORDER_CREATION_REMOVE_ALERT, ORDER_CREATION_REQUEST, ORDER_CREATION_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REMOVE_ALERT, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_PAY_REQUEST, ORDER_PAY_RESET, ORDER_PAY_SUCCESS, ORDER_PAY_FAIL, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_FAIL, ORDER_LIST_MY_REMOVE_ALERT } from "../constants/actionTypes"
+import { ORDER_CREATION_FAIL, ORDER_CREATION_REMOVE_ALERT, ORDER_CREATION_REQUEST, ORDER_CREATION_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REMOVE_ALERT, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_PAY_REQUEST, ORDER_PAY_RESET, ORDER_PAY_SUCCESS, ORDER_PAY_FAIL, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_FAIL, ORDER_LIST_MY_REMOVE_ALERT, ORDER_LIST_REQUEST, ORDER_LIST_FAIL, ORDER_LIST_REMOVE_ALERT, ORDER_LIST_SUCCESS } from "../constants/actionTypes"
 
 export const createOrder = order => async (dispatch, getState) => {
     console.log(order)
@@ -122,5 +122,36 @@ export const listMyOrders =() => async (dispatch, getState) => {
                 type:ORDER_LIST_MY_REMOVE_ALERT
             })
         }, 5000)
+    }
+}
+
+export const listOrders = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type:ORDER_LIST_REQUEST
+        });
+
+        const {userLogin:{currentUser}} = getState();        
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${currentUser.token}`
+            }
+        };
+
+        const {data} = await axios.get(`/api/order`, config)
+        dispatch({type:ORDER_LIST_SUCCESS, payload:data})
+        
+    } catch (error) {
+        dispatch({
+            type: ORDER_LIST_FAIL,
+            payload: error.response && error.response.data.message? error.response.data.message : error.message
+        });
+
+        setTimeout(() => {
+            dispatch({
+                type: ORDER_LIST_REMOVE_ALERT
+            }, 5000)
+        })
     }
 }
