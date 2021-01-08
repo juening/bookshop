@@ -1,4 +1,4 @@
-import { ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_RESET, ORDER_PAY_SUCCESS } from '../constants/actionTypes';
+import { ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_RESET, ORDER_PAY_SUCCESS, ORDER_PAY_REMOVE_ALERT } from '../constants/actionTypes';
 
 const initialState = {error:null, success:false, loading:false};
 
@@ -15,6 +15,9 @@ const orderPayReducer = (state = initialState, action) => {
         
         case ORDER_PAY_RESET:
             return {...initialState};
+
+        case ORDER_PAY_REMOVE_ALERT:
+            return {...state, error:null};
 
         default:
             return state;

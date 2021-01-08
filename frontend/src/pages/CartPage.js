@@ -2,7 +2,7 @@ import React , {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link } from 'react-router-dom';
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap';
-import {addItem, setCartQuantity, clearItem} from '../actions/carActions'
+import {addItem, setCartQuantity, clearItem} from '../actions/cartActions'
 import Message from '../components/Message';
 
 const CartPage = ({match, location, history}) => {
