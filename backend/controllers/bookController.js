@@ -50,6 +50,36 @@ export const createBook = asyncHandler(async (req, res) => {
     res.status(201).json(createdBook);
 });
 
+export const createReview = asyncHandler(async (req, res) => {
+    const {rating, comment} = req.body;
+    const book = await Book.findById(req.params.id);
+
+    if(book) {
+        const alreadyReviewed = book.reviews.find(review => review.user.toString() === req.user._id.toString());
+
+        if(alreadyReviewed) {
+            res.status(400);
+            throw new Error('Product already reviewed.')
+        } else {
+            const review = {
+                comment,
+                rating:Number(rating),
+                user:req.user._id,
+                name:req.user.name
+            };
+            book.reviews.push(review);
+            book.numReviews = book.reviews.length;
+            book.rating = (book.reviews.reduce((acc, item) => acc + item.rating, 0) / book.numReviews).toFixed(1);
+        }
+
+        await book.save();
+        res.status(201).json({message: 'Review added.'})
+    } else {
+        res.status(404);
+        throw new Error('Book does not exist.')
+    }
+})
+
 export const updateBook = asyncHandler(async (req, res) => {
     const {
         name,

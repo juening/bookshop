@@ -85,7 +85,7 @@ const OrderDetailsPage = ({match}) => {
                     </p>
                     <p>{order.shippingAddress.streetAddress}, </p> <p>{order.shippingAddress.city}, {order.shippingAddress.state}, </p> <p>{order.shippingAddress.zip}</p>
 
-                    {order.isDelivered? <Message variant='success'>Delivered on {order.deliveredAt.substring(0,10)}.</Message> : <Message variant='danger'>Not Delivered.</Message>}
+                    {order.isDelivered? <Message variant='success'>Delivered on {order.deliveredAt.substring(0,10)}</Message> : <Message variant='danger'>Not Delivered.</Message>}
                 </ListGroup.Item>
 
                 <ListGroup.Item>
