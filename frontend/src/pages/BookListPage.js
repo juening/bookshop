@@ -32,7 +32,7 @@ const BookListPage = ({history}) => {
         } 
 
         if(createdBook) {
-            history.push(`/admin/book/${createBook._id}/edit`)
+            history.push(`/admin/book/${createdBook._id}/edit`)
         } else {
             dispatch(fetchBooks())
         }

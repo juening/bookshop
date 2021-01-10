@@ -34,7 +34,7 @@ export const createBook = asyncHandler(async (req, res) => {
         name:'Test Book',
         price:1,
         user:req.user._id,
-        image:'/images/sample.jpg',
+        image:'sample.jpg',
         category:'sample cate',
         author:'Ted Smith',
         description:'Test des',
