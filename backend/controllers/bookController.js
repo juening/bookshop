@@ -2,7 +2,13 @@ import asyncHandler from 'express-async-handler';
 import Book from '../models/bookModel.js';
 
 export const getBooks = asyncHandler(async (req, res) => {
-    const books = await Book.find({});
+    const keyword = req.query.keyword? {
+        name:{
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    }: {}
+    const books = await Book.find({...keyword});
     res.json(books)
 });
 

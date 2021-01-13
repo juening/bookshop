@@ -7,15 +7,16 @@ import Book from '../components/Book';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const HomePage = () => {
+const HomePage = ({match}) => {
+    const keyword = match.params.keyword;
     const dispatch = useDispatch();    
 
     const bookList = useSelector(state => state.bookList);
     const {books, loading ,error} = bookList;
     
     useEffect(() => {
-        dispatch(fetchBooks()) 
-    }, [dispatch])
+        dispatch(fetchBooks(keyword)) 
+    }, [dispatch, keyword])
 
     return (
         <>
