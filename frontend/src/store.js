@@ -20,6 +20,7 @@ import bookCreateReducer from './reducers/bookCreateReducer';
 import bookUpdateReducer from './reducers/bookUpdateReducer';
 import orderListReducer from './reducers/orderListReducer';
 import orderDeliverReducer from './reducers/orderDeliverReducer';
+import bookCreateReviewReducer from './reducers/bookCreateReviewReducer';
 
 const rootReducer = combineReducers({
     bookList: bookListReducer,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
     bookDelete: bookDeleteReducer,
     bookCreate:bookCreateReducer,
     bookUpdate:bookUpdateReducer,
+    bookCreateReview: bookCreateReviewReducer,
     orderList:orderListReducer,
     orderDeliver:orderDeliverReducer
 });
