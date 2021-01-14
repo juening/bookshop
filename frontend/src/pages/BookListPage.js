@@ -5,15 +5,19 @@ import {LinkContainer} from 'react-router-bootstrap';
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 
 import {BOOK_CREATE_RESET} from '../constants/actionTypes';
 import {fetchBooks, deleteBook, createBook} from '../actions/bookActions'
 
-const BookListPage = ({history}) => {
+const BookListPage = ({history, match}) => {
+
+    const pageNumber = match.params.pageNumber || 1;
+
     const dispatch = useDispatch();
 
     const bookList = useSelector(state => state.bookList);
-    const {books, error, loading} = bookList;
+    const {books, error, loading, pages, page} = bookList;
 
     const bookDelete = useSelector(state => state.bookDelete);
     const {success:successDelete, error:errorDelete, loading:loadingDelete} = bookDelete;
@@ -34,10 +38,10 @@ const BookListPage = ({history}) => {
         if(createdBook) {
             history.push(`/admin/book/${createdBook._id}/edit`)
         } else {
-            dispatch(fetchBooks())
+            dispatch(fetchBooks('', pageNumber))
         }
 
-    }, [dispatch, history,  currentUser, createdBook]);
+    }, [dispatch, history,  currentUser, createdBook, pageNumber]);
 
     const deleteHandler =(id) => {
         if(window.confirm('Are you sure?')) {
@@ -66,6 +70,7 @@ const BookListPage = ({history}) => {
             {loadingCreate && <Loader /> } 
             { errorCreate && <Message variant='danger'>{errorCreate}</Message> }
             {loading ? <Loader /> : error? <Message variant='danger'>{error}</Message>: (
+                <>
                 <Table striped bordered hover responsive className='table-md'>
                     <thead>
                         <tr>
@@ -102,6 +107,8 @@ const BookListPage = ({history}) => {
                         </tr>))}
                     </tbody>
                 </Table>
+                <Paginate pages={pages} page={page} isAdmin ={currentUser.isAdmin}></Paginate>
+            </>
             )}
         </>
     )

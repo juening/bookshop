@@ -2,11 +2,11 @@ import axios from 'axios';
 
 import {BOOK_LIST_REQUEST, BOOK_LIST_SUCCESS, BOOK_LIST_FAIL, BOOK_DETAILS_REQUEST, BOOK_DETAILS_SUCCESS, BOOK_DETAILS_FAIL, BOOK_DELETE_REQUEST, BOOK_DELETE_SUCCESS, BOOK_DELETE_FAIL, BOOK_DELETE_REMOVE_ALERT, BOOK_CREATE_SUCCESS, BOOK_CREATE_REQUEST, BOOK_CREATE_FAIL, BOOK_CREATE_REMOVE_ALERT, BOOK_UPDATE_RESET, BOOK_UPDATE_REMOVE_ALERT, BOOK_UPDATE_REQUEST, BOOK_UPDATE_FAIL, BOOK_UPDATE_SUCCESS, BOOK_CREATE_REVIEW_FAIL, BOOK_CREATE_REVIEW_REMOVE_ALERT, BOOK_CREATE_REVIEW_REQUEST, BOOK_CREATE_REVIEW_SUCCESS} from '../constants/actionTypes';
 
-export const fetchBooks = (keyword ='') => async (dispatch) => {
+export const fetchBooks = (keyword ='', pageNumber='') => async (dispatch) => {
     try {
         dispatch({type:BOOK_LIST_REQUEST});
 
-        const {data} = await axios.get(`/api/books?keyword=${keyword}`);
+        const {data} = await axios.get(`/api/books?keyword=${keyword}&pageNumber=${pageNumber}`);
 
         dispatch({type:BOOK_LIST_SUCCESS, payload: data});
     } catch (error) {

@@ -2,14 +2,20 @@ import asyncHandler from 'express-async-handler';
 import Book from '../models/bookModel.js';
 
 export const getBooks = asyncHandler(async (req, res) => {
+    const pageSize = 4;
+    const page = Number (req.query.pageNumber) || 1;
     const keyword = req.query.keyword? {
         name:{
             $regex: req.query.keyword,
             $options: 'i'
         }
     }: {}
-    const books = await Book.find({...keyword});
-    res.json(books)
+
+    const count = await Book.countDocuments({...keyword});
+    const books = await Book.find({...keyword}).limit(pageSize).skip(pageSize * (page -1));
+    const pages = Math.ceil(count/pageSize);
+
+    res.json({books, page, pages})
 });
 
 export const getBookById = asyncHandler(async (req, res) => {
