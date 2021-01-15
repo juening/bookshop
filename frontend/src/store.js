@@ -21,10 +21,12 @@ import bookUpdateReducer from './reducers/bookUpdateReducer';
 import orderListReducer from './reducers/orderListReducer';
 import orderDeliverReducer from './reducers/orderDeliverReducer';
 import bookCreateReviewReducer from './reducers/bookCreateReviewReducer';
+import bookTopReducer from './reducers/bookTopReducer';
 
 const rootReducer = combineReducers({
     bookList: bookListReducer,
     bookDetails: bookDetailsReducer,
+    bookTop: bookTopReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,

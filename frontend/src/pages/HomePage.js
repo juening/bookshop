@@ -7,6 +7,7 @@ import Book from '../components/Book';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
+import BookCarousel from '../components/BookCarousel';
 
 const HomePage = ({match}) => {
     const keyword = match.params.keyword;
@@ -22,7 +23,8 @@ const HomePage = ({match}) => {
 
     return (
         <>
-            <h1>Bestsellers</h1>
+            {!keyword && <BookCarousel />}
+            <h1>Latest Books</h1>
             {
                 loading? <Loader /> :error? <Message variant='danger'>{error}</Message> : (
                     <>
@@ -38,7 +40,6 @@ const HomePage = ({match}) => {
 
                 )
             }
-           
         </>
     )
 }

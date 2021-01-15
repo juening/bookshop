@@ -127,3 +127,9 @@ export const updateBook = asyncHandler(async (req, res) => {
         throw new Error('Book not found.')
     }
 })
+
+export const getTopBooks =  asyncHandler(async (req, res) => {
+    const books = await Book.find({}).sort({rating:-1}).limit(3);
+    
+    res.json(books);
+})
