@@ -2,11 +2,14 @@ import React, { useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap';
+
 import {fetchBook, createBookReview} from '../actions/bookActions'
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Rating from '../components/Rating';
+import Meta from '../components/Meta';
+
 import { BOOK_CREATE_REVIEW_RESET } from '../constants/actionTypes';
 
 const BookPage = ({match, history}) => {
@@ -53,6 +56,7 @@ const BookPage = ({match, history}) => {
             </Link>
             { loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :  (  book &&  
             <>
+                <Meta title={book.name} />
                 <Row>
                     <Col md={6} >
                         <Image src={book.image} alt={book.name} fluid />

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Row, Col} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 import {fetchBooks } from '../actions/bookActions'
 import Book from '../components/Book';
@@ -8,6 +9,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
 import BookCarousel from '../components/BookCarousel';
+import Meta from '../components/Meta';
 
 const HomePage = ({match}) => {
     const keyword = match.params.keyword;
@@ -23,7 +25,8 @@ const HomePage = ({match}) => {
 
     return (
         <>
-            {!keyword && <BookCarousel />}
+            <Meta />
+            {!keyword ? <BookCarousel /> : <Link to='/' className='btn btn-light'>GO BACK</Link> }
             <h1>Latest Books</h1>
             {
                 loading? <Loader /> :error? <Message variant='danger'>{error}</Message> : (

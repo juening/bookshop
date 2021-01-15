@@ -6,7 +6,7 @@ const SearchBox = ({history}) => {
     const [keyword, setKeyword] = useState('');
 
     const submitHandler = e => {
-        e.preentDefault();
+        e.preventDefault();
         if(keyword.trim()) {
             history.push(`/search/${keyword}`)
         } else {
@@ -15,7 +15,7 @@ const SearchBox = ({history}) => {
     }
     
     return (
-        <Form onSubmmit={submitHandler} inline>
+        <Form onSubmit={submitHandler} inline>
             <Form.Control 
             type='text' 
             name='q' 
